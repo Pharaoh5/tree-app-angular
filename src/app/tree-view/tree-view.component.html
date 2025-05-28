@@ -1,0 +1,26 @@
+<ul role="tree" aria-label="Tree view">
+  <li *ngFor="let node of nodes"
+      role="treeitem"
+      [attr.aria-expanded]="node.children.length ? (isExpanded(node) ? 'true' : 'false') : undefined">
+    <span *ngIf="node.children.length"
+          (click)="onToggle(node)"
+          class="toggle-icon"
+          tabindex="0"
+          (keydown.enter)="onToggle(node)"
+          (keydown.space)="onToggle(node); $event.preventDefault()">
+      {{ isExpanded(node) ? '▾' : '▸' }}
+    </span>
+    <span [attr.aria-label]="node.is_deleted ? 'Deleted item: '
+    + node.id + ' – ' + node.title : node.id + ' – ' + node.title"
+      [ngClass]="{'deleted': node.is_deleted}">
+      {{ node.id }} – {{ node.title }}
+    </span>
+    <app-tree-view
+      *ngIf="node.children.length && isExpanded(node)"
+      [nodes]="node.children"
+      [expanded]="expanded"
+      [isExpanded]="isExpanded"
+      (toggle)="toggle.emit($event)">
+    </app-tree-view>
+  </li>
+</ul>

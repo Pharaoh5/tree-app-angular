@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+ul[role="tree"] {
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+li[role="treeitem"] {
+  position: relative;
+  margin: 0.25rem 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  // Вертикальная линия слева для вложенных списков
+  & > ul[role="tree"] {
+    margin-left: 0.75rem;
+    padding-left: 1rem;
+    border-left: 1px dashed #ddd;
+  }
+}
+
+.toggle-icon {
+  display: inline-block;
+  width: 1rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+
+  &:focus {
+    outline: 2px solid #007acc;
+    border-radius: 2px;
+  }
+}
+
+// Поворачиваем стрелку, когда раскрыто
+li[role="treeitem"][aria-expanded="true"] > .toggle-icon {
+  transform: rotate(90deg);
+}
+
+span[aria-label] {
+  padding-left: 0.25rem;
+  vertical-align: middle;
+}
+
+// Состояние удалённого узла
+.deleted {
+  color: #999;
+  text-decoration: line-through;
+}
