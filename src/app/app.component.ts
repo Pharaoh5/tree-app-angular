@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.http.get<TreeNode[]>('/assets/mocks/tree-data.json')
+    this.http.get<TreeNode[]>('assets/mocks/tree-data.json')
       .pipe(
         catchError(this.handleError),
         finalize(() => {
